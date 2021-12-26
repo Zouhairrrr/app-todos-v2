@@ -1,0 +1,6 @@
+start script for nodemon 
+watching changes on all mentioned filles;
+-e is for listening for changes;
+
+dotenv is for setting ENVIRONMENT VARIABLES;
+and 
