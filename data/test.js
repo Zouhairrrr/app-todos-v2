@@ -1,32 +1,19 @@
 let fs = require('fs');
 let path = require('path');
+const { STATIC_EXTENTION } = require('../configs/config');
 
 const ReadStaticFiles = (req, res) => {
     let filePath = '.' + req.url;
     if (filePath == './') {
         filePath = '../public/index.html';
+    } else if (filePath == './app') {
+        filePath = '../public/project.html'
+    }else{
+        filePath = '../public/404.html';
     }
     let extname = String(path.extname(filePath)).toLowerCase();
-    let mimeTypes = {
-        '.html': 'text/html',
-        '.js': 'text/javascript',
-        '.css': 'text/css',
-        '.json': 'application/json',
-        '.png': 'image/png',
-        '.jpg': 'image/jpg',
-        '.gif': 'image/gif',
-        '.svg': 'image/svg+xml',
-        '.wav': 'audio/wav',
-        '.mp4': 'video/mp4',
-        '.woff': 'application/font-woff',
-        '.ttf': 'application/font-ttf',
-        '.eot': 'application/vnd.ms-fontobject',
-        '.otf': 'application/font-otf',
-        '.wasm': 'application/wasm'
-    };
-
-    let contentType = mimeTypes[extname] || 'application/octet-stream';
-    fs.readFile(path.join(__dirname,filePath), (error, content) => {
+    let contentType = STATIC_EXTENTION[extname] || 'application/octet-stream';
+    fs.readFile(path.join(__dirname, filePath), (error, content) => {
         if (error) {
             if (error.code == 'ENOENT') {
                 fs.readFile('./404.html', (error, content) => {
@@ -46,4 +33,4 @@ const ReadStaticFiles = (req, res) => {
     });
 
 }
-module.exports = ReadStaticFiles
+module.exports = ReadStaticFiles;

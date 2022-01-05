@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
     database: 'todosv2',
 });
 
-connection.connect(function (err) {
+connection.connect((err) => {
     if (err) {
         return console.error('error: ' + err.message);
     }

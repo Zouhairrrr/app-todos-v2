@@ -1,1 +1,1 @@
-const a = require('./lib/response')
+const a = require('./lib/response');
